@@ -39,3 +39,17 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
       });
 })
+
+//--Post joke---//
+
+router.post('/', withAuth, (req, res) => {
+    Joke.create({
+        title: req.body.title,
+        joke_body: req.body.joke_body,
+        user_id: req.session.user_id
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+})
