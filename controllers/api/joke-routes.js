@@ -4,13 +4,34 @@ const { User, Joke } = require('../../models')
 const withAuth = require('../../utils/auth')
 
 //---Get all jokes---//
+
 router.get('/', (req, res) => {
     Joke.findAll({
         attributes: [
             'id',
             'joke_body',
             'title',
-            'created_at',
+            'created_at'
+        ]
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+})
+
+//---Get single joke---//
+
+router.get('/:id', (req, res) => {
+    Joke.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: [
+            'id',
+            'joke_body',
+            'title',
+            'created_at'
         ]
     })
     .catch(err => {
