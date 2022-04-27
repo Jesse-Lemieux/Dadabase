@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
             'created_at'
         ]
     })
+    .then(dbPostData => res.json(dbPostData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -34,6 +35,13 @@ router.get('/:id', (req, res) => {
             'created_at'
         ]
     })
+    .then(dbPostData => {
+        if(!dbPostData){
+            res.status(404).json({message: 'No joke found with that id!'});
+            return;
+        }
+        res.json(dbPostData);
+    })
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -48,6 +56,7 @@ router.post('/', withAuth, (req, res) => {
         joke_body: req.body.joke_body,
         user_id: req.session.user_id
     })
+    .then(dbPostData => res.json(dbPostData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
