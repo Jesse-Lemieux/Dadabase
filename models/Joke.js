@@ -1,26 +1,27 @@
 //---Global Variables---//
-const { Model, Datatypes} = require('sequelize');
+const { Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 //---Joke class---//
 class Joke extends Model{}
-    Joke.init(
+
+Joke.init(
         {
             id: {
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true
             },
             title:{
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull:false
             },
             joke_body:{
-                type: Datatypes.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             user_id:{
-                type: Datatypes.INTEGER,
+                type: DataTypes.INTEGER,
                 references: {
                     model: 'user',
                     key: 'id'
