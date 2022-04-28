@@ -15,6 +15,12 @@ router.get('/', withAuth, (req, res) => {
       'joke_body',
       'title',
       'created_at'
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      }
     ]
   })
   .then(dbPostData => {
