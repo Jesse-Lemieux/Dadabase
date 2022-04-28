@@ -1,0 +1,30 @@
+<section>
+  <h2>Add a joke!</h2>
+
+  <form class="new-joke-form">
+    <div>
+      <label for="joke-title">Title</label>
+      <input type="text" id="joke-title" name="joke-title" />
+    </div>
+    <div>
+      <label for="joke-body">Joke</label>
+      <input id="joke-body" name="joke-body" />
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
+
+{{#if jokes.length}}
+<section>
+  <h2>Your Posts</h2>
+  <ol>
+    {{#each jokes as |joke|}}
+    <li>
+      {{> joke-info joke}}
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}
+
+<script src="/javascript/add-joke.js"></script>
