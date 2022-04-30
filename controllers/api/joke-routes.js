@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
             'id',
             'joke_body',
             'title',
-            'created_at'
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
         ]
     })
     .then(dbPostData => res.json(dbPostData))
@@ -32,7 +33,8 @@ router.get('/:id', (req, res) => {
             'id',
             'joke_body',
             'title',
-            'created_at'
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
         ],
         include: [
             {
@@ -70,5 +72,15 @@ router.post('/', withAuth, (req, res) => {
         res.status(500).json(err);
       });
 })
+
+router.put('/upvote', withAuth, (req, res) => {
+    // custom static method created in models/Post.js
+    Joke.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, User })
+      .then(updatedVoteData => res.json(updatedVoteData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 
 module.exports = router;
