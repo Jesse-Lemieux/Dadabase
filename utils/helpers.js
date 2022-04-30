@@ -18,6 +18,11 @@ module.exports = {
       }
   
       return word;
+    },
+    first_ten: (jokesarr) => {
+      for(let i = 0; i < jokesarr.length; i++){
+        
+      }
     }
   };
   
