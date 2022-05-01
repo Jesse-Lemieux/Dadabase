@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User } =  require('../models')
+const { User, Joke, Vote } =  require('../models')
 
 router.get('/', (req, res) => {
   Joke.findAll({
@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
   })
   .then(dbPostData => {
     const jokes = dbPostData.map(joke => joke.get({ plain: true }));
+    jokes.sort((a, b) => parseFloat(b.vote_count) - parseFloat(a.vote_count));
     res.render('homepage', { jokes, loggedIn: true });
   })
 })

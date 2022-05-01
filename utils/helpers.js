@@ -19,10 +19,8 @@ module.exports = {
   
       return word;
     },
-    first_ten: (jokesarr) => {
-      for(let i = 0; i < jokesarr.length; i++){
-        
-      }
+    sort_des: (jokesarr) => {
+      jokesarr.sort((a, b) => parseFloat(b.vote_count) - parseFloat(a.vote_count));
     }
   };
   

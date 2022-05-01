@@ -1,0 +1,8 @@
+<div>
+    <h2>Top jokes:</h2>
+    {{#each jokes as |joke|}}
+    <li>
+      {{> joke-info joke}}
+    </li>
+    {{/each}}
+</div>
