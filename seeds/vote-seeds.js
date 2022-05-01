@@ -1,4 +1,4 @@
-const {joke} = require('../models')
+const {Vote} = require('../models')
 
 const jokedata = [
     {
@@ -191,6 +191,6 @@ const jokedata = [
     }
   ];
 
-const seedjokes = () => joke.bulkCreate(jokedata);
+const seedVotes = () => Vote.bulkCreate(jokedata);
 
-module.exports = seedjokes;
+module.exports = seedVotes;
