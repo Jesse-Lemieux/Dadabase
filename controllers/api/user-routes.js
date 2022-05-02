@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {User} = require('../../models');
+const validator = require('validator')
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -13,11 +14,15 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    if (validator.isEmail(req.body.email)){
+      
+    
     User.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
     })
+  
       .then(dbUserData => {
         req.session.save(() => {
           req.session.user_id = dbUserData.id;
@@ -31,6 +36,8 @@ router.post('/', (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
+    }
+    else{console.log("invalid email")}
   });
   
   router.post('/login', (req, res) => {
