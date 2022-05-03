@@ -6,7 +6,7 @@ class Joke extends Model {
     static upvote(body, models) {
       return models.Vote.create({
         user_id: body.user_id,
-        joke_id: body.post_id
+        joke_id: body.joke_id
       }).then(() => {
         return Joke.findOne({
           where: {
@@ -14,7 +14,7 @@ class Joke extends Model {
           },
           attributes: [
             'id',
-            'joke_url',
+            'joke_body',
             'title',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
