@@ -23,7 +23,7 @@ User.belongsToMany(Joke, {
   Joke.belongsToMany(User, {
     through: Vote,
     as: 'voted_posts',
-    foreignKey: 'post_id',
+    foreignKey: 'joke_id',
     onDelete: 'SET NULL'
   });
   
@@ -33,7 +33,7 @@ User.belongsToMany(Joke, {
   });
   
   Vote.belongsTo(Joke, {
-    foreignKey: 'post_id',
+    foreignKey: 'joke_id',
     onDelete: 'SET NULL'
   });
   
@@ -42,7 +42,7 @@ User.belongsToMany(Joke, {
   });
   
   Joke.hasMany(Vote, {
-    foreignKey: 'post_id'
+    foreignKey: 'joke_id'
   });
 
   module.exports = { User, Joke, Vote };
