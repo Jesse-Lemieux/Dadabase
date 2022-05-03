@@ -1,4 +1,3 @@
-var MicroModal = require('micromodal')
 async function upvoteClickHandler(event) {
     event.preventDefault();
     console.log('click')
@@ -18,7 +17,7 @@ async function upvoteClickHandler(event) {
     if (response.ok) {
       document.location.reload();
     } else {
-      MicroModal.show('modal-1');
+      alert(response.statusText);
     }
   }
   
