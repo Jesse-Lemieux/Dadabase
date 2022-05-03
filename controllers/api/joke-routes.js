@@ -33,14 +33,22 @@ router.get('/:id', (req, res) => {
             'joke_body',
             'title',
             'created_at'
-        ]
+        ],
+        include: [
+            {
+              model: User,
+              attributes: ['username']
+            }
+          ]
     })
     .then(dbPostData => {
         if(!dbPostData){
             res.status(404).json({message: 'No joke found with that id!'});
             return;
         }
-        res.json(dbPostData);
+        const joke = dbPostData.get({ plain: true });
+        res.render('single-joke', joke);
+        console.log(joke)
     })
     .catch(err => {
         console.log(err);
