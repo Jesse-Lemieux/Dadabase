@@ -1,15 +1,17 @@
 <article class="post">
   <div class="title">
-    <h2>{{title}}</h2>
+    <h2>{{jokes.title}}</h2>
   </div>
-  <div class="joke">{{joke_body}}</div>
+  <div class="joke">{{jokes.joke_body}}</div>
   <div class="meta">
-    by {{user.username}} on {{created_at}}
+    by {{jokes.user.username}} on {{jokes.created_at}}
   </div>
+  {{#if loggedIn}}
   <div>
     <button type="button" class="upvote-btn">upvote</button>
   </div>
+  {{/if}}
 </article>
-{{#if loggedIn}}
+
 <script src="/javascript/upvote.js"></script>
-{{/if}}
+

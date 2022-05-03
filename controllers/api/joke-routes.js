@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('sequelize');
-const { User, Joke } = require('../../models')
+const { User, Joke, Vote } = require('../../models')
 const withAuth = require('../../utils/auth')
 
 //---Get all jokes---//
@@ -48,9 +48,13 @@ router.get('/:id', (req, res) => {
             res.status(404).json({message: 'No joke found with that id!'});
             return;
         }
-        const joke = dbPostData.get({ plain: true });
-        res.render('single-joke', joke);
-        console.log(joke)
+        const jokes = dbPostData.get({ plain: true });
+        console.log(jokes)
+        res.render('single-joke', {
+            loggedIn: req.session.loggedIn,
+            jokes
+        });
+       
     })
     .catch(err => {
         console.log(err);

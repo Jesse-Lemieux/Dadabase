@@ -26,7 +26,7 @@ router.get('/', withAuth, (req, res) => {
   })
   .then(dbPostData => {
     const jokes = dbPostData.map(joke => joke.get({ plain: true }));
-    res.render('dashboard', { jokes, loggedIn: true });
+    res.render('dashboard', { jokes, loggedIn: req.session.loggedIn });
   })
 });
 
