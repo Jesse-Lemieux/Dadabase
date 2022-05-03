@@ -1,6 +1,6 @@
 async function upvoteClickHandler(event) {
     event.preventDefault();
-  
+    console.log('click')
     const id = window.location.toString().split('/')[
       window.location.toString().split('/').length - 1
     ];
@@ -21,4 +21,4 @@ async function upvoteClickHandler(event) {
     }
   }
   
-  document.querySelector('.upvote-btn').addEventListener('click', upvoteClickHandler);
+  document.querySelector('.upvote').addEventListener('click', console.log('click'));
