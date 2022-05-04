@@ -18,9 +18,6 @@ module.exports = {
       }
   
       return word;
-    },
-    sort_des: (jokesarr) => {
-      jokesarr.sort((a, b) => parseFloat(b.vote_count) - parseFloat(a.vote_count));
     }
   };
   
