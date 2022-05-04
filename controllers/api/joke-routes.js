@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('sequelize');
-const { User, Joke, Vote } = require('../../models')
+const { User, Joke, Vote, Comment } = require('../../models')
 const withAuth = require('../../utils/auth')
 
 //---Get all jokes---//
@@ -13,6 +13,20 @@ router.get('/', (req, res) => {
             'title',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'joke_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes:['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
         ]
     })
     .then(dbPostData => res.json(dbPostData))
@@ -38,10 +52,18 @@ router.get('/:id', (req, res) => {
         ],
         include: [
             {
-              model: User,
-              attributes: ['username']
+                model: Comment,
+                attributes: ['id', 'comment_text', 'joke_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes:['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
             }
-          ]
+        ]
     })
     .then(dbPostData => {
         if(!dbPostData){
@@ -49,7 +71,7 @@ router.get('/:id', (req, res) => {
             return;
         }
         const jokes = dbPostData.get({ plain: true });
-        console.log(jokes)
+        console.log(jokes.comments)
         res.render('single-joke', {
             loggedIn: req.session.loggedIn,
             jokes
