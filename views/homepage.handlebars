@@ -1,7 +1,7 @@
-<div>
-    <h2>Top jokes:</h2>
+<div class="container mt-5">
+    <h2>Top Dad jokes:</h2>
     {{#each jokes as |joke|}}
-    <li>
+    <li style="list-style: none;">
       {{> joke-info joke}}
     </li>
     {{/each}}

@@ -38,7 +38,32 @@
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box; 
+}
+
+.form-label{
+  font-weight: bold;
+}
+
+.joke{
+  border: 2px solid #373b41;
+  background-color: #373b41;
+  color: antiquewhite;
+  margin: 15px 0px;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.joke a{
+  color: #17a2b8;
+}
+
+.dadabase{
+  color: antiquewhite;
+  font-weight: bold;
+  padding-left: 5px;
+}
 
 html {
   font-family: sans-serif;
@@ -498,7 +523,12 @@ pre {
   position: relative;
   width: 100%;
   padding-right: 15px;
-  padding-left: 15px; }
+  padding-left: 15px; 
+}
+
+.joketext{
+  padding-left: 0px;
+}
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -8235,7 +8265,9 @@ textarea.form-control {
   .btn.btn-primary {
     background: #3e64ff !important;
     border: 1px solid #3e64ff !important;
-    color: #fff !important; }
+    color: #fff !important;
+    margin: 10px 0px;
+   }
     .btn.btn-primary:hover {
       border: 1px solid #3e64ff;
       background: transparent;
