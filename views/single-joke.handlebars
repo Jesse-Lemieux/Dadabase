@@ -1,0 +1,17 @@
+<article class="container mt-5 post">
+  <div class="title">
+    <h2>{{jokes.title}}</h2>
+  </div>
+  <div class="joke">{{jokes.joke_body}}</div>
+  <div class="meta">
+    by {{jokes.user.username}} on {{jokes.created_at}}
+  </div>
+  {{#if loggedIn}}
+  <div>
+    <button type="button" class="btn btn-primary  upvote-btn">upvote</button>
+  </div>
+  {{/if}}
+</article>
+
+<script src="/javascript/upvote.js"></script>
+

@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const {User} = require('../../models');
+const validator = require('validator');
+const { request } = require('express');
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -13,11 +15,13 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+
     User.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
     })
+  
       .then(dbUserData => {
         req.session.save(() => {
           req.session.user_id = dbUserData.id;

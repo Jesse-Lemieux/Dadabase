@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('sequelize');
-const { User, Joke } = require('../../models')
+const { User, Joke, Vote } = require('../../models')
 const withAuth = require('../../utils/auth')
 
 //---Get all jokes---//
@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
             'id',
             'joke_body',
             'title',
-            'created_at'
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
         ]
     })
     .then(dbPostData => res.json(dbPostData))
@@ -32,15 +33,28 @@ router.get('/:id', (req, res) => {
             'id',
             'joke_body',
             'title',
-            'created_at'
-        ]
+            'created_at',
+            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
+        ],
+        include: [
+            {
+              model: User,
+              attributes: ['username']
+            }
+          ]
     })
     .then(dbPostData => {
         if(!dbPostData){
             res.status(404).json({message: 'No joke found with that id!'});
             return;
         }
-        res.json(dbPostData);
+        const jokes = dbPostData.get({ plain: true });
+        console.log(jokes)
+        res.render('single-joke', {
+            loggedIn: req.session.loggedIn,
+            jokes
+        });
+       
     })
     .catch(err => {
         console.log(err);
@@ -62,5 +76,15 @@ router.post('/', withAuth, (req, res) => {
         res.status(500).json(err);
       });
 })
+
+router.put('/upvote', withAuth, (req, res) => {
+    // custom static method created in models/Post.js
+    Joke.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, User })
+      .then(updatedVoteData => res.json(updatedVoteData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 
 module.exports = router;

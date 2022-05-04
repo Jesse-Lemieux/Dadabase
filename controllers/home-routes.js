@@ -1,9 +1,28 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User } =  require('../models')
+const { User, Joke, Vote } =  require('../models')
 
 router.get('/', (req, res) => {
-    res.render('homepage', {loggedIn: req.session.loggedIn})
+  Joke.findAll({
+    attributes: [
+      'id',
+      'joke_body',
+      'title',
+      'created_at',
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE joke.id = vote.joke_id)'), 'vote_count']
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  })
+  .then(dbPostData => {
+    const jokes = dbPostData.map(joke => joke.get({ plain: true }));
+    jokes.sort((a, b) => parseFloat(b.vote_count) - parseFloat(a.vote_count));
+    res.render('homepage', { jokes, loggedIn: req.session.loggedIn });
+  })
 })
 
 router.get('/login', (req, res) => {
@@ -12,7 +31,7 @@ router.get('/login', (req, res) => {
       return;
     }
   
-    res.render('login');
+    res.render('homepage');
   });
   
 module.exports = router;
