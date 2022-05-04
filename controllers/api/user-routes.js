@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Joke, Vote} = require('../../models');
+const {User, Joke, Vote, Comment} = require('../../models');
 const sequelize = require('sequelize');
 const { json } = require('express/lib/response');
 
@@ -24,6 +24,21 @@ router.get('/:id', (req, res) => {
         {
           model: Joke,
           attributes: ['id', 'joke_body', 'title', 'created_at']
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'created_at'],
+          include: {
+            model: Joke,
+            attributes:['title']
+          }
+        },
+        {
+          model: Joke,
+          attributes: ['title'],
+          through: Vote,
+          as: 'voted_posts'
+        
         }
       ]
     })
