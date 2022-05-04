@@ -7,11 +7,18 @@
     by {{jokes.user.username}} on {{jokes.created_at}}
   </div>
   {{#if loggedIn}}
+  <form class="comment-form">
   <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+  <div>
+        <button type="submit">add comment</button>
     <button type="button" class="upvote-btn">upvote</button>
   </div>
+  </form>
   {{/if}}
 </article>
-
+{{> comments joke.comments}}
 <script src="/javascript/upvote.js"></script>
+<script src="/javascript/comment.js"></script>
 
