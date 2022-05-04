@@ -3,6 +3,6 @@
     <a href="/api/jokes/{{id}}">{{title}}</a>
   </div>
   <div class="meta">
-   likes: {{vote_count}}. by {{user.username}} on {{format_date created_at}}
+   likes: {{vote_count}}. by <a href="/api/users/{{user.id}}">{{user.username}}</a> on {{format_date created_at}}
   </div>
 </article>
