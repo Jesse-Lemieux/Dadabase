@@ -3,6 +3,7 @@
     <a href="/api/jokes/{{id}}">{{title}}</a>
   </div>
   <div class="meta">
-   likes: {{vote_count}}. by {{user.username}} on {{format_date created_at}}
+   likes: {{vote_count}}. by <a href="/api/users/{{user.id}}">{{user.username}}</a> on {{format_date created_at}}
+  <a href="/api/jokes/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
   </div>
 </article>

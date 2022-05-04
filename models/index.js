@@ -1,6 +1,7 @@
 const User = require('./User');
 const Joke = require('./Joke');
 const Vote = require('./Vote')
+const Comment = require('./Comment')
 
 //---Model Associations---//
 
@@ -45,4 +46,23 @@ User.belongsToMany(Joke, {
     foreignKey: 'joke_id'
   });
 
-  module.exports = { User, Joke, Vote };
+  Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+  });
+  
+  Comment.belongsTo(Joke, {
+    foreignKey: 'joke_id',
+    onDelete: 'SET NULL'
+  });
+  
+  User.hasMany(Comment, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+  });
+  
+  Joke.hasMany(Comment, {
+    foreignKey: 'joke_id'
+  });
+  
+  module.exports = { User, Joke, Vote, Comment };
