@@ -1,4 +1,4 @@
-<article class="post">
+<article class="container mt-5 post">
   <div class="title">
     <h2>{{jokes.title}}</h2>
   </div>
@@ -9,11 +9,13 @@
   {{#if loggedIn}}
   <form class="comment-form">
   <div>
+
     <textarea name="comment-body"></textarea>
   </div>
   <div>
         <button type="submit">add comment</button>
-    <button type="button" class="upvote-btn">upvote</button>
+    <button type="button" class="btn btn-primary upvote-btn">upvote</button>
+
   </div>
   </form>
   {{/if}}
