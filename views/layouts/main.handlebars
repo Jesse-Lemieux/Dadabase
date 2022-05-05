@@ -10,8 +10,10 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">	
 		<link rel="stylesheet" href="/css/ionicons.min.css">
 		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/background.css">
 
 <body class="d-flex flex-column min-vh-100">
+  <section class="background">
   <div class="wrapper">
     <header>
       <nav class="navbar navbar-dark bg-dark">
@@ -33,10 +35,10 @@
       {{{ body }}}
     </main>
 <div class="container">
-  <footer class="py-3 my-4">
+  <footer class="footer fixed-bottom container">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
     </ul>
-    <p class="text-center text-muted"> <i class="fa-solid fa-face-grin-tongue-wink"></i> Thanks for visiting</p>
+    <p class="text-center text-light"> <i class="fa-solid fa-face-grin-tongue-wink"></i> Thanks for visiting</p>
   </footer>
 </div>
 
@@ -131,6 +133,7 @@
   {{#if loggedIn}}
   <script src="/javascript/logout.js"></script>
   {{/if}}
+</section>
 </body>
 
 </html>
