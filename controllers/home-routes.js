@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
   .then(dbPostData => {
     const jokes = dbPostData.map(joke => joke.get({ plain: true }));
     jokes.sort((a, b) => parseFloat(b.vote_count) - parseFloat(a.vote_count));
+    console.log(jokes)
     res.render('homepage', { jokes, loggedIn: req.session.loggedIn });
   })
 })

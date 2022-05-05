@@ -20,12 +20,13 @@ router.get('/', withAuth, (req, res) => {
     include: [
       {
         model: User,
-        attributes: ['username']
+        attributes: ['username', 'id']
       }
     ]
   })
   .then(dbPostData => {
     const jokes = dbPostData.map(joke => joke.get({ plain: true }));
+    console.log(jokes)
     res.render('dashboard', { jokes, loggedIn: req.session.loggedIn });
   })
 });
