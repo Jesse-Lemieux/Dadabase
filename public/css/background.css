@@ -12,6 +12,10 @@
     background-size: 400% 400%;
     position: relative;
     animation: change 15s ease-in-out;
+    overflow: auto;
+}
+.bgvh{
+    height: 100vh;
 }
 
 @keyframes change{
