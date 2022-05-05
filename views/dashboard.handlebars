@@ -1,14 +1,14 @@
 <section class="container mt-5">
-  <h2>Add a joke!</h2>
+  <h2>Dadd a joke!</h2>
 
-  <form class="row new-joke-form">
-    <div class="col-md-3">
+  <form class="col new-joke-form joketext">
+    <div class="col-md-3 joketext">
       <label for="joke-title" class="form-label">Title</label>
       <input type="text" class="form-control" id="joke-title" name="joke-title"/>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-5 joketext">
       <label for="joke-body" class="form-label">Joke</label>
-      <input id="joke-body" class="form-control" name="joke-body" />
+      <textarea id="joke-body" class="form-control" name="joke-body" rows="4"></textarea>
     </div>
     <div >
     <button type="submit" class="btn btn-primary">Create</button>
@@ -18,14 +18,14 @@
 
 {{#if jokes.length}}
 <section class="container mt-5">
-  <h2>Your Jokes</h2>
-  <ol>
+  <h2>Your Dad Jokes</h2>
+  <ul style="list-style: none; padding: 0px">
     {{#each jokes as |joke|}}
     <li>
       {{> joke-info joke}}
     </li>
     {{/each}}
-  </ol>
+  </ul>
 </section>
 {{/if}}
 
