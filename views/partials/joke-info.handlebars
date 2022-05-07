@@ -5,7 +5,8 @@
 
   <div class="meta"> <i class="fa-solid fa-thumbs-up"></i>
    likes: {{vote_count}}. by <a href="/api/users/{{user.id}}">{{user.username}}</a> on {{format_date created_at}}
-  <a href="/api/jokes/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+   
+ <i class="fa-solid fa-comment"></i> <a href="/api/jokes/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
   
   </div>
 </article>
