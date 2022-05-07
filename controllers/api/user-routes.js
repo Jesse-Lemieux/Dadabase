@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const {User} = require('../../models');
+const {User, Joke, Vote, Comment} = require('../../models');
+const sequelize = require('sequelize');
+const { json } = require('express/lib/response');
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -12,12 +14,49 @@ router.get('/', (req, res) => {
     });
 })
 
+router.get('/:id', (req, res) => {
+  User.findOne({
+    attributes: { exclude: ['password']},
+      where: {
+          id: req.params.id
+      },
+      include: [
+        {
+          model: Joke,
+          attributes: ['id', 'joke_body', 'title', 'created_at']
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'created_at'],
+          include: {
+            model: Joke,
+            attributes:['title']
+          }
+        },
+        {
+          model: Joke,
+          attributes: ['title'],
+          through: Vote,
+          as: 'voted_posts'
+        
+        }
+      ]
+    })
+    .then(dbPostData => {
+     const user = dbPostData.get({ plain: true })
+     console.log(user)
+      res.render('single-user', { user, loggedIn: req.session.loggedIn, });
+    })
+  })
+
 router.post('/', (req, res) => {
+
     User.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
     })
+  
       .then(dbUserData => {
         req.session.save(() => {
           req.session.user_id = dbUserData.id;

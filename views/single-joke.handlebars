@@ -1,0 +1,28 @@
+<article class="container mt-5 post">
+  <div class="title">
+    <h2>{{jokes.title}}</h2>
+  </div>
+  <div class="joke">{{jokes.joke_body}}</div>
+  <div class="meta">
+    by {{jokes.user.username}} on {{jokes.created_at}}
+  </div>
+  {{#if loggedIn}}
+  <form class="comment-form">
+  <div>
+
+    <textarea class="form-control"  name="comment-body" rows="2"></textarea>
+  </div>
+  <div>
+        <button type="submit" class="btn btn-primary">add comment</button>
+    <button type="button" class="btn btn-primary upvote-btn">upvote</button>
+
+  </div>
+  </form>
+  {{/if}}
+</article>
+<div class="d-flex flex-column align-items-center">
+{{> comments jokes.comments}}
+</div>
+<script src="/javascript/upvote.js"></script>
+<script src="/javascript/comment.js"></script>
+
