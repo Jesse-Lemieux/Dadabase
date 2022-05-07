@@ -13,8 +13,22 @@ The focus of our porject was to create a site where users could log in using a v
 
 ## Usage
 
-When you get to the site, you are greeted with a list of jokes in a descending order from most upvoted to least upvoted.
-<img src="./assets/images/Homepage Screenshot" />
+When you get to the site, you are greeted with a list of jokes in a descending order from most upvoted to least upvoted. All of the jokes are displayed on a card in which you can see the tile of the joke, how many upvotes it has, the user who posted the joke, and the date they posted it. 
+![Homepage](./assets/imgs/Homepage%20Screenshot.png)
+
+
+When you click on a joke of your choice, you will be taken to the joke itself and you can see what it says. In this example, we have a vampire joke and below the card, you can see all the things listed previously like the user that posted the joke, when they posted it, etc. In addition to that, you can see how many people left a comment for this particular joke and when they posted their comment. 
+![Individual Joke](./assets/imgs/Individual%20Joke%20Screenshot.png)
+
+
+Now normally, there would be options like upvoting and commenting ourself, but we cannot do that because wer are not logged in. This sets up the next portion we will discuss, which is the login page:
+
+
+
+
+
+
+
 
 
 
