@@ -2,7 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Joke } = require('../models');
 const withAuth = require('../utils/auth');
-
+//Get all jokes created by sesssion user
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
   console.log('======================');

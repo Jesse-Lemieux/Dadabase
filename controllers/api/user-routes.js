@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {User, Joke, Vote, Comment} = require('../../models');
 const sequelize = require('sequelize');
 const { json } = require('express/lib/response');
-
+//Get all users
 router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password']}
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
       res.status(500).json(err);
     });
 })
-
+//Get single user
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password']},
@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
       res.render('single-user', { user, loggedIn: req.session.loggedIn, });
     })
   })
-
+//Create user
 router.post('/', (req, res) => {
 
     User.create({
@@ -71,7 +71,7 @@ router.post('/', (req, res) => {
         res.status(500).json(err);
       });
   });
-  
+  //Create session
   router.post('/login', (req, res) => {
     User.findOne({
       where: {
@@ -99,7 +99,7 @@ router.post('/', (req, res) => {
       });
     });
   });
-
+//destroy session
   router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
       req.session.destroy(() => {

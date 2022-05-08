@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Joke, Vote } =  require('../models')
-
+//Get all jokes is descending order by upvotes
 router.get('/', (req, res) => {
   Joke.findAll({
     attributes: [
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     res.render('homepage', { jokes, loggedIn: req.session.loggedIn });
   })
 })
-
+//Redirect to homepage if not logged in
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
       res.redirect('/');
